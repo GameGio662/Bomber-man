@@ -9,9 +9,12 @@ public class Bomb : MonoBehaviour
     [SerializeField] GameObject Esplosione1, Esplosione2, Esplosione3, Esplosione4;
     [SerializeField] Collider2D collider;
 
+    MyPlayer mP;
+
     private void Start()
     {
         collider= GetComponent<Collider2D>();
+        mP = FindObjectOfType<MyPlayer>();
     }
 
     private void Update()
@@ -49,6 +52,8 @@ public class Bomb : MonoBehaviour
             Instantiate(Esplosione4, expos, Quaternion.Euler(0, 0, 180));
         if (count >= 4)
             Destroy(gameObject);
+
+        mP.bombCount++;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

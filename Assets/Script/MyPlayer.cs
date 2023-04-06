@@ -5,6 +5,7 @@ using UnityEngine;
 public class MyPlayer : MonoBehaviour
 {
     [SerializeField] float speed;
+    [HideInInspector] public int bombCount = 3;
 
     [SerializeField] GameObject Bomb;
 
@@ -35,12 +36,13 @@ public class MyPlayer : MonoBehaviour
 
     void SetBomb()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && bombCount > 0)
         {
             Vector2 bombpos = transform.position;
             bombpos.x = Mathf.Round(bombpos.x);
             bombpos.y = Mathf.Round(bombpos.y);
             Instantiate(Bomb, bombpos, Quaternion.identity);
+            bombCount--;
         }
     }
 }
