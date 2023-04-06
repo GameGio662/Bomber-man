@@ -12,28 +12,34 @@ public class TypeBlock : MonoBehaviour
     }
 
     public Vector3 pos;
-    const int enumSize = 4;
+    const int enumSize = 3;
     SpriteRenderer sp;
 
-    public colro[] symbolColors = new Renderer[enumSize];
+    public Color[] symbolColors = new Color[enumSize];
 
 
     [SerializeField] public TypeBlock_ typeBlock;
 
     private void Awake()
     {
-        Type();
-    }
-
-    private void Start()
-    {
         sp = GetComponentInChildren<SpriteRenderer>();
     }
 
-    void Type()
+    public void SetType(TypeBlock_ type)
     {
-        typeBlock = (TypeBlock_)Random.Range(0, 3);
-        sp.color = symbolColors[(int)typeBlock];
+
+        typeBlock = type;
+        sp.material.color = symbolColors[(int)typeBlock];
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Spawn")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 }
