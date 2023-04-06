@@ -57,8 +57,7 @@ public class MapCreate : MonoBehaviour
             var typeName = myGrid[x, y];
             typeName.name = "Indistruttibile";
         }
-
-
+        
     }
 
     void SpawnSymbol(int x, int y)
