@@ -8,17 +8,27 @@ public class Esplosione : MonoBehaviour
     [SerializeField] private EsplosioneStats esplosioneStats;
 
     Rigidbody2D rb;
+    UIManager UI;
+    GameManager GM;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        UI = FindObjectOfType<UIManager>();
+        GM = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
-        rb.velocity = new Vector2(esplosioneStats.Right, esplosioneStats.Up);
-        rb.AddForce(new Vector2(esplosioneStats.Right, esplosioneStats.Up), ForceMode2D.Impulse);
-        Timer();
+        if (GM.gameStatus == GameManager.GameStatus.gameRunning)
+        {
+            rb.velocity = new Vector2(esplosioneStats.Right, esplosioneStats.Up);
+            rb.AddForce(new Vector2(esplosioneStats.Right, esplosioneStats.Up), ForceMode2D.Impulse);
+            Timer();
+
+        }
+        else
+            rb.velocity = Vector2.zero;
     }
 
     float time;
@@ -36,14 +46,13 @@ public class Esplosione : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
+            UI.MuroScore();
         }
-        if(collision.gameObject.name == "Indistruttibile")
+        if (collision.gameObject.name == "Indistruttibile")
             Destroy(gameObject);
 
         if (collision.gameObject.name == "Player")
-        {
-            Destroy(collision.gameObject);
             Destroy(gameObject);
-        }
+
     }
 }

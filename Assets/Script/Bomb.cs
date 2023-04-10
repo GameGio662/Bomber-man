@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -10,11 +11,13 @@ public class Bomb : MonoBehaviour
     [SerializeField] Collider2D collider;
 
     MyPlayer mP;
+    UIManager UI;
 
     private void Start()
     {
         collider= GetComponent<Collider2D>();
         mP = FindObjectOfType<MyPlayer>();
+        UI = FindObjectOfType<UIManager>();
     }
 
     private void Update()
@@ -53,7 +56,7 @@ public class Bomb : MonoBehaviour
         if (count >= 4)
             Destroy(gameObject);
 
-        mP.bombCount++;
+        UI.bombCount++;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

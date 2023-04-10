@@ -7,18 +7,23 @@ public class Enemy : MonoBehaviour
 {
     int Turn, hitCount;
     float speed = 2.5f;
-    Rigidbody2D rb;
 
+    Rigidbody2D rb;
+    UIManager UI;
+    GameManager GM;
     void Start()
     {
         time = 1;
         rb = GetComponent<Rigidbody2D>();
+        UI = FindObjectOfType<UIManager>();
+        GM = FindObjectOfType<GameManager>();
     }
 
 
     void Update()
     {
-        Move();
+        if (GM.gameStatus == GameManager.GameStatus.gameRunning)
+            Move();
     }
 
     float time;
@@ -55,23 +60,27 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name == "Distruttibile")
+        if (collision.gameObject.name == "Distruttibile")
         {
             Turn = Random.Range(0, 3);
             hitCount++;
-            if(hitCount >= 5)
+            if (hitCount >= 5)
             {
                 hitCount = 0;
                 Destroy(collision.gameObject);
             }
         }
 
-        if(collision.gameObject.name == "Indistruttibile")
+        if (collision.gameObject.name == "Indistruttibile")
         {
             Turn = Random.Range(0, 3);
         }
 
         if (collision.gameObject.tag == "Bomb")
+        {
             Destroy(gameObject);
+            UI.EnemyScore();
+            UI.EnemyCount -= 1;
+        }
     }
 }

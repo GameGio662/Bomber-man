@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MyPlayer : MonoBehaviour
 {
     [SerializeField] float speed;
-    [HideInInspector] public int bombCount = 3;
 
     [SerializeField] GameObject Bomb;
 
-    Vector2 dir;
-
     Rigidbody2D rb;
+    UIManager UI;
+    GameManager GM;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        UI = FindObjectOfType<UIManager>();
+        GM = FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
-        Move();
-        SetBomb();
+        if (GM.gameStatus == GameManager.GameStatus.gameRunning)
+        {
+            Move();
+            SetBomb();
+
+        }
     }
 
     void Move()
@@ -36,13 +41,19 @@ public class MyPlayer : MonoBehaviour
 
     void SetBomb()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && bombCount > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && UI.bombCount > 0)
         {
             Vector2 bombpos = transform.position;
             bombpos.x = Mathf.Round(bombpos.x);
             bombpos.y = Mathf.Round(bombpos.y);
             Instantiate(Bomb, bombpos, Quaternion.identity);
-            bombCount--;
+            UI.bombCount--;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bomb")
+            SceneManager.LoadScene("Napoli", LoadSceneMode.Single);
     }
 }

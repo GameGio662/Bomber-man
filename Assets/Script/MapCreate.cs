@@ -13,9 +13,10 @@ public class MapCreate : MonoBehaviour
 
     [SerializeField] GameObject item;
 
+
     void Awake()
     {
-        InizializeMatrix();
+            InizializeMatrix();
     }
 
     void Update()
@@ -50,14 +51,15 @@ public class MapCreate : MonoBehaviour
             myGrid[x, y].SetType(TypeBlock_.Distruttibili);
             var typeName = myGrid[x, y];
             typeName.name = "Distruttibile";
-        } else
+        }
+        else
         {
             SpawnSymbol(x, y);
             myGrid[x, y].SetType(TypeBlock_.Indistruttibili);
             var typeName = myGrid[x, y];
             typeName.name = "Indistruttibile";
         }
-        
+
     }
 
     void SpawnSymbol(int x, int y)
