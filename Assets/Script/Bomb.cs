@@ -1,22 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Bomb : MonoBehaviour
 {
     int count;
     [SerializeField] GameObject Esplosione1, Esplosione2, Esplosione3, Esplosione4;
-    [SerializeField] Collider2D collider;
+    Collider2D collider;
 
-    MyPlayer mP;
     UIManager UI;
 
     private void Start()
     {
-        collider= GetComponent<Collider2D>();
-        mP = FindObjectOfType<MyPlayer>();
+        collider = GetComponent<Collider2D>();
         UI = FindObjectOfType<UIManager>();
     }
 
@@ -61,7 +57,7 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             collider.isTrigger = false;
         }

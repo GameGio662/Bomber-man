@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
         ScoreEndText.text = score.ToString();
         EnemyCountText.text = EnemyCount.ToString();
 
+        Debug.Log(EnemyCount);
         if(EnemyCount <= 0)
         {
             GM.EndGame();

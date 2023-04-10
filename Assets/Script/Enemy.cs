@@ -81,6 +81,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             UI.EnemyScore();
             UI.EnemyCount -= 1;
+            Debug.Log("ciao");
         }
     }
 }

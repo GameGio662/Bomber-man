@@ -51,7 +51,7 @@ public class Esplosione : MonoBehaviour
         if (collision.gameObject.name == "Indistruttibile")
             Destroy(gameObject);
 
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player" || collision.gameObject.tag == "Enemy")
             Destroy(gameObject);
 
     }
