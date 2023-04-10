@@ -8,6 +8,7 @@ TagManager:
   - Indistruttibile
   - Distruttibile
   - Bomb
+  - Enemy
   layers:
   - Default
   - TransparentFX

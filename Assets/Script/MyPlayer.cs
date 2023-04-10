@@ -53,7 +53,7 @@ public class MyPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Bomb")
+        if (collision.gameObject.tag == "Bomb" || collision.gameObject.tag == "Enemy")
             SceneManager.LoadScene("Napoli", LoadSceneMode.Single);
     }
 }
